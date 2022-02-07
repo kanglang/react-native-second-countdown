@@ -2,7 +2,7 @@
  * @Author: kanglang
  * @Date: 2022-01-19 15:08:26
  * @LastEditors: kanglang
- * @LastEditTime: 2022-02-07 14:08:23
+ * @LastEditTime: 2022-02-07 15:00:53
  * @Description: 读秒倒计时组件
 -->
 
@@ -13,7 +13,22 @@
 import SecondCountdown from 'react-native-second-countdown';
 
 // TODO: What to do with the module?
-<SecondCountdown />
+<SecondCountdown 
+	style={styles.sendBtn}
+	count={10}
+	pressAction={this.sendMsgCode}
+	changeWithCount={(count) => `${count}秒后重试`}
+    id='test'
+/>
+
+sendMsgCode = (startCountDownCallback) => {
+	startCountDownCallback(() => {
+		// 这里执行发送短信验证码
+		msg.emit('app:tip', { text: '发送短信验证码，开始倒计时' });
+
+	});
+}
+
 ```
 ## Prop Introduce 属性介绍
 
@@ -28,7 +43,7 @@ import SecondCountdown from 'react-native-second-countdown';
 | activeStyle             	|按钮激活的时候样式         				   | object  |  { backgroundColor: '#ffffff'}       |
 | disableTextStyle          |按钮禁用时文字的样式         				   | object  |  {color: '#919599'}       |
 | activeTextStyle           |按钮激活时文字的样式        				   | object  |  {color: '#248BFF'}       |
-| pressAction             	|触发倒计时事件         				   | Func  |  ()=>{}       |
+| pressAction             	|触发倒计时事件 有参数回调方法startCountDownCallback       				   | Func  |  ()=>{}       |
 | changeWithCount           |监听剩余时间事件        				   | Func  |  (count) => `${count}s后重试`      |
 | end             			|监听读秒结束后的回调事件         				   | Func  |  ()=>{}      |
 

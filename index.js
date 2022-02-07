@@ -2,7 +2,7 @@
  * @Author: kanglang
  * @Date: 2020-11-09 13:42:18
  * @LastEditors: kanglang
- * @LastEditTime: 2022-02-07 13:55:07
+ * @LastEditTime: 2022-02-07 14:54:25
  * @Description: 短信读秒倒计时组件
  */
 
@@ -199,7 +199,7 @@ export default class SecondCountdown extends Component {
 
   buttonPressed = () => {
     const { pressAction } = this.props;
-    pressAction && pressAction();
+    pressAction && pressAction(this.startCountDown);
   }
 }
 
