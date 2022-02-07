@@ -2,7 +2,7 @@
  * @Author: kanglang
  * @Date: 2020-11-09 13:42:18
  * @LastEditors: kanglang
- * @LastEditTime: 2022-02-07 15:50:33
+ * @LastEditTime: 2022-02-07 17:10:12
  * @Description: 短信读秒倒计时组件
  */
 
@@ -185,6 +185,16 @@ export default class SecondCountdown extends Component {
       };
       timeRecodes.push(buttonInfo);
     }
+  }
+
+  // 组件外部主动调用回调方法
+  startCountDown(callback) {
+    const { isLock } = this.state;
+    if (isLock) return;
+    this.setState({ isLock: true });
+    this.startCountDownWithCount(Date.now());
+    this.recordButtonInfo();
+    callback && callback();
   }
 
   buttonPressed = () => {

@@ -2,7 +2,7 @@
  * @Author: kanglang
  * @Date: 2022-01-19 15:08:26
  * @LastEditors: kanglang
- * @LastEditTime: 2022-02-07 15:00:53
+ * @LastEditTime: 2022-02-07 17:15:56
  * @Description: 读秒倒计时组件
 -->
 
@@ -11,21 +11,29 @@
 ## Usage 使用
 ```javascript
 import SecondCountdown from 'react-native-second-countdown';
+  
+  componentDidMount() {
+	  // 初始化时开启倒计时则主动调用，配合ref={(e) => { this.countDownButton = e; }}使用
+	this.countDownButton.startCountDown(()=>{
+		// 这里执行发送短信验证码
+		msg.emit('app:tip', { text: '发送短信验证码，开始倒计时' });
+	});
+  }
 
 // TODO: What to do with the module?
 <SecondCountdown 
+    id='test'
 	style={styles.sendBtn}
 	count={10}
 	pressAction={this.sendMsgCode}
 	changeWithCount={(count) => `${count}秒后重试`}
-    id='test'
+	ref={(e) => { this.countDownButton = e; }} // 初始化开启倒计时时需要
 />
 
 sendMsgCode = (startCountDownCallback) => {
 	startCountDownCallback(() => {
 		// 这里执行发送短信验证码
 		msg.emit('app:tip', { text: '发送短信验证码，开始倒计时' });
-
 	});
 }
 
