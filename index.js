@@ -2,7 +2,7 @@
  * @Author: kanglang
  * @Date: 2020-11-09 13:42:18
  * @LastEditors: kanglang
- * @LastEditTime: 2022-02-07 14:54:25
+ * @LastEditTime: 2022-02-07 15:50:33
  * @Description: 短信读秒倒计时组件
  */
 
@@ -33,7 +33,7 @@ export default class SecondCountdown extends Component {
     beginText: '获取验证码', // 初始状态按钮title
     endText: '重新获取', // 读秒结束后按钮的title
     count: 60, // 总的计时数 单位是秒s
-    pressAction: () => { }, // 按下按钮的事件,但是触发倒数(startCountDown)需要你自己来调用
+    pressAction: () => { }, // 按下按钮的事件
     changeWithCount: () => { }, // 读秒变化的函数,该函数带有一个参数count,表示当前的剩余时间
     end: () => { }, // 读秒完毕后的回调,读秒结束触发
     style: {}, // 按钮样式
@@ -187,19 +187,16 @@ export default class SecondCountdown extends Component {
     }
   }
 
-  // 组件外部调用回调方法
-  startCountDown(callback) {
-    const { isLock } = this.state;
-    if (isLock) return;
-    this.setState({ isLock: true });
-    this.startCountDownWithCount(Date.now());
-    this.recordButtonInfo();
-    callback && callback();
-  }
-
   buttonPressed = () => {
     const { pressAction } = this.props;
-    pressAction && pressAction(this.startCountDown);
+    pressAction && pressAction((callback) => {
+      const { isLock } = this.state;
+      if (isLock) return;
+      this.setState({ isLock: true });
+      this.startCountDownWithCount(Date.now());
+      this.recordButtonInfo();
+      callback && callback();
+    });
   }
 }
 
