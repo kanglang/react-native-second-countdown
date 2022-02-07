@@ -1,0 +1,25 @@
+{
+  "name": "react-native-second-countdown",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react-native"
+  ],
+  "author": {
+    "name": "kanglanglang",
+    "email": "mister_Kang@163.com"
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "react-native": ">=0.62.0",
+    "react": ">=16.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:kanglang/react-native-second-countdown.git"
+  }
+}
